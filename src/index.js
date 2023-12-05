@@ -26,7 +26,7 @@ client.once(Discord.Events.ClientReady, () => {
 });
 
 client.on(Discord.Events.MessageCreate, (message) => {
-    if(message.author.id !== client.user.id){
+    if(message.author.id !== client.user.id && message.guildId === config.guild_id){
         if(message.channel.type === Discord.ChannelType.DM){
             client.guilds.fetch(config.guild_id).then((guild) => {
                 guild.channels.fetch().then((channels) => {

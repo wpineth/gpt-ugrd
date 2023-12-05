@@ -26,7 +26,7 @@ client.once(Discord.Events.ClientReady, () => {
 });
 
 client.on(Discord.Events.MessageCreate, (message) => {
-    if(message.author.id !== client.user.id && message.guildId === config.guild_id){
+    if(message.author.id !== client.user.id){
         if(message.channel.type === Discord.ChannelType.DM){
             client.guilds.fetch(config.guild_id).then((guild) => {
                 guild.channels.fetch().then((channels) => {
@@ -45,7 +45,7 @@ client.on(Discord.Events.MessageCreate, (message) => {
                     }
                 });
             });
-        }else{
+        }else if(message.guildId === config.guild_id){
             client.users.fetch(message.channel.name).then((user) => {
                 user.send(message.content).catch((err) => {
                     console.log(err);
